@@ -4,8 +4,10 @@ import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
@@ -23,7 +25,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try (Statement state = Util.getConnection().createStatement()) {
             state.executeUpdate(query);
-            System.out.println("TABLE USER CREATED");
+            System.out.println("TABLE CREATED");
+            System.out.println("▼ CONNECTION CLOSE");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -35,7 +38,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try (Statement state = Util.getConnection().createStatement()) {
             state.executeUpdate(query);
-            System.out.println("TABLE USER DROPPED");
+            System.out.println("TABLE DROPPED");
+            System.out.println("▼ CONNECTION CLOSE");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -52,6 +56,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
             pState.executeUpdate();
             System.out.println("USER SAVED");
+            System.out.println("▼ CONNECTION CLOSE");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -65,6 +70,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
             pState.executeUpdate();
             System.out.println("USER DELETED");
+            System.out.println("▼ CONNECTION CLOSE");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -72,10 +78,41 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public List<User> getAllUsers() {
-        return null;
+        String query = "SELECT name, lastname, age FROM user";
+        List<User> userList = new ArrayList<>();
+
+        try (Statement state = Util.getConnection().createStatement()) {
+            ResultSet resultSet = state.executeQuery(query);
+
+            while(resultSet.next()) {
+                User user = new User();
+                user.setName(resultSet.getString("name"));
+                user.setLastName(resultSet.getString("lastname"));
+                user.setAge(resultSet.getByte("age"));
+
+                userList.add(user);
+            }
+
+            System.out.println("USER LIST CREATED");
+            System.out.println("▼ CONNECTION CLOSE");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return userList;
     }
 
     public void cleanUsersTable() {
+        String query = "TRUNCATE TABLE user";
 
+        try (Statement state = Util.getConnection().createStatement()) {
+            state.executeUpdate(query);
+            System.out.println("TABLE CLEARED");
+            System.out.println("▼ CONNECTION CLOSE");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
