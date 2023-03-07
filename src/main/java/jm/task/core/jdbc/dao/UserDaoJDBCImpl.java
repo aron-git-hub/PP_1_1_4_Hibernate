@@ -55,7 +55,7 @@ public class UserDaoJDBCImpl implements UserDao {
             pState.setByte(3, age);
 
             pState.executeUpdate();
-            System.out.println("USER SAVED");
+            System.out.println("USER" + " " + name + " " + "ADDED");
             System.out.println("▼ CONNECTION CLOSE");
 
         } catch (SQLException e) {
@@ -78,7 +78,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public List<User> getAllUsers() {
-        String query = "SELECT name, lastname, age FROM user";
+        String query = "SELECT id, name, lastname, age FROM user";
         List<User> userList = new ArrayList<>();
 
         try (Statement state = Util.getConnection().createStatement()) {
@@ -86,8 +86,9 @@ public class UserDaoJDBCImpl implements UserDao {
 
             while(resultSet.next()) {
                 User user = new User();
+                user.setId(resultSet.getLong("id"));
                 user.setName(resultSet.getString("name"));
-                user.setLastName(resultSet.getString("lastname"));
+                user.setLastName(resultSet.getString("lastName"));
                 user.setAge(resultSet.getByte("age"));
 
                 userList.add(user);
