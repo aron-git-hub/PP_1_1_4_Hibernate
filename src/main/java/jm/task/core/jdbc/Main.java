@@ -8,14 +8,14 @@ public class Main {
         // реализуйте алгоритм здесь
         UserService userService = new UserServiceImpl();
         userService.createUsersTable();
-
-        userService.saveUser("John", "Cohen", (byte) 74);
-        userService.saveUser("David", "Johnson", (byte) 47);
-        userService.saveUser("Mark", "Davidson", (byte) 22);
-        userService.saveUser("Noah", "Davidson", (byte) 18);
-
-        System.out.println(userService.getAllUsers());
-        userService.cleanUsersTable();
+//        userService.saveUser("John", "Cohen", (byte) 74);
+//        userService.saveUser("David", "Johnson", (byte) 47);
+//        userService.saveUser("Mark", "Davidson", (byte) 22);
+//        userService.saveUser("Noah", "Davidson", (byte) 18);
+//        System.out.println(userService.getAllUsers());
+//        userService.removeUserById(1);
+//        System.out.println(userService.getAllUsers());
+//        userService.cleanUsersTable();
         userService.dropUsersTable();
     }
 }
