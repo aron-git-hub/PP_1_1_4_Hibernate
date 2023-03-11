@@ -38,7 +38,7 @@ public class Util {
                 props.put("hibernate.show_sql", "true");
 
                 Configuration config = new Configuration()
-                        .setProperties(props).addAnnotatedClass(User.class);
+                        .setProperties(props).addAnnotatedClass(User.class)/*.configure()*/;
 
                 ServiceRegistry serviceReg = new StandardServiceRegistryBuilder()
                         .applySettings(config.getProperties()).build();
