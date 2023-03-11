@@ -14,7 +14,7 @@
 <!--            <AppenderRef ref="Console" />-->
 <!--        </Logger>-->
 
-<!--        &lt;!&ndash; Log all SQL statements &ndash;&gt;-->
+        <!-- Log all SQL statements -->
 <!--        <Logger name="org.hibernate.SQL" level="debug" additivity="false">-->
 <!--            <AppenderRef ref="Console" />-->
 <!--        </Logger>-->

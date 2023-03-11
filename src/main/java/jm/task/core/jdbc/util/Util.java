@@ -35,6 +35,7 @@ public class Util {
                 props.put(Environment.USER, USERNAME);
                 props.put(Environment.PASS, PASSWORD);
 //                props.put(Environment.DIALECT, DIALECT);
+                props.put("hibernate.show_sql", "true");
 
                 Configuration config = new Configuration()
                         .setProperties(props).addAnnotatedClass(User.class);

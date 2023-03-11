@@ -1,9 +1,14 @@
 package jm.task.core.jdbc.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 @Entity
-@Table
+@Table(name="user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,9 +67,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "\n" + "id=" + id +
-                " name='" + name + '\'' +
-                " lastName='" + lastName + '\'' +
-                " age=" + age;
+        return "\n" + "id = " + id + " " +
+                " " + "name = " + name + " " +
+                " " + "lastName = " + lastName + " " +
+                " " + "age = " + age;
     }
 }
